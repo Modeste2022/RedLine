@@ -8,7 +8,81 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 2%;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .fixed-social {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .btn-primary:hover {
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .btn-secondary:hover {
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .btn-danger:hover {
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        .btn-info:hover {
+            width: 200px;
+            transition: width 0.3s;
+        }
+
+        /* pour les featured Movies */
+        #featured-movies {
+            margin: 2em 0;
+        }
+
+        #featured-movies .buttons {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        #featured-movies .buttons button {
+            margin: 0 10px;
+            padding: 0.5em 1em;
+            cursor: pointer;
+        }
+
+        .film {
+            display: none;
+            /* Masquer les films supplémentaires par défaut */
+        }
+
+        /* pour les featured series tv */
+        #featured-series-tv {
+            margin: 2em 0;
+        }
+
+        #featured-series-tv {
+            display: block;
+            margin-bottom: 1em;
+        }
+
+        #featured-series-tv {
+            width: 100%;
+            height: auto;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -18,34 +92,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    // Afficher le pop-up d'âge
-    $('#agePopup').modal('show');
 
-    // Vérification de l'âge
-    document.getElementById('confirmAge').addEventListener('click', function() {
-        var birthdate = new Date(document.getElementById('birthdate').value);
-        var today = new Date();
-        var age = today.getFullYear() - birthdate.getFullYear();
-        var month = today.getMonth() - birthdate.getMonth();
-        if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
-            age--;
-        }
-
-        if (age >= 18) {
-            $('#agePopup').modal('hide');
-        } else {
-            window.location.href = 'https://www.google.com';
-        }
-    });
-
-    // Afficher l'avertissement de cookies
-    setTimeout(function() {
-        document.getElementById('cookieWarning').style.display = 'block';
-    }, 3000);
-});
-    </script>
     <!-- Pop-up d'âge -->
     <div id="agePopup" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -73,33 +120,451 @@
 
     <!-- Menu de Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#movies">Films</a></li>
-                <li class="nav-item"><a class="nav-link" href="#featured">Featured Movies</a></li>
-                <li class="nav-item"><a class="nav-link" href="#shop">Shop Movies</a></li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#featured-movies">Featured Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#featured-series-tv">Featured series TV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#shop-movies">Shop Movie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Us</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <!-- Header -->
-    <header id="home" class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">AllezCine!</h1>
-            <p class="lead">Location et vente des meilleurs films</p>
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Bienvenue sur notre site de films</h1>
+                <p class="lead">Découvrez et regardez des films incroyables.</p>
+            </div>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="batmanmovie-2017-comedie.jpg" alt="First slide" height=""
+                        width="100%">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="swissarmyman-2016-comedie.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="WhatWeDoInTheShadows-2014-comedie.jpg" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </header>
 
-    <!-- Contenu des sections (Films, Featured Movies, Shop Movies, Contact) -->
+    <!-- login and register -->
+    <button class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+    <button class="btn btn-secondary" data-toggle="modal" data-target="#registerModal">Register</button>
 
-    <footer class="text-center">
-        <p>&copy; 2025 Cinema</p>
-        <button id="backToTop" class="btn btn-danger">↑</button>
-    </footer>
+    <!-- Modal Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="identifier">Identifiant</label>
+                            <input type="text" class="form-control" id="identifier"
+                                placeholder="Entrez votre identifiant">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password"
+                                placeholder="Entrez votre mot de passe">
+                        </div>
+                        <button type="button" class="btn btn-primary">OK</button>
+                        <button type="button" class="btn btn-secondary">Créer un compte</button>
+                        <button type="button" class="btn btn-secondary">Rester connecté</button><br>
+                        <a href="#">Si vous avez oublié votre mot de passe</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Register -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" class="form-control" id="name" placeholder="Entrez votre nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" placeholder="Entrez votre e-mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Password</label>
+                            <input type="password" class="form-control" id="regPassword"
+                                placeholder="Entrez votre mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword"
+                                placeholder="Confirmez votre mot de passe">
+                        </div>
+                        <div class="form-group">
+                            <label for="terms">Conditions générales d'utilisation</label>
+                            <select class="form-control" id="terms">
+                                <option>Accepter</option>
+                                <option>Refuser</option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary">Register</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-social">
+        <a href="#" class="btn btn-primary">Facebook</a>
+        <a href="#" class="btn btn-info">Twitter</a>
+        <a href="#" class="btn btn-secondary">Instagram</a>
+        <a href="#" class="btn btn-danger">Gmail</a>
+    </div>
+
+    <!-- Contenu des sections (Featured Movies,Featured series TV, Shop Movies, Contact) -->
+
+    <section id="featured-movies">
+        <h2>Featured Movies</h2>
+        <div class="buttons">
+            <button onclick="filterMovies('action')">Action</button>
+            <button onclick="filterMovies('comedy')">Comedy</button>
+            <button onclick="filterMovies('drama')">Drama</button>
+            <button onclick="toggleMoreMovies()">Plus des films</button>
+        </div>
+        <div class="films">
+            <div class="film" data-genre="action">
+                <img src="intouchables-2011-comedie.jpg" alt="Action Movie">
+                <p>description</p>
+            </div>
+            <div class="film" data-genre="action">
+                <img src="Survivestyle5-2004-comedie.jpg" alt="Action Movie">
+                <p>description</p>
+            </div>
+            <!-- Ajouter plus de films ici -->
+        </div>
+    </section>
+
+    <section id="featured-series-tv">
+        <h2>Featured Series TV</h2>
+        <div style="display: flex; justify-content: center;">
+            <div style="margin: 06rem;">
+                <a href="https://www.youtube.com/watch?v=-hzFTJDJGkQ"><img src="lesdeuxtours-2002-aventure.jpg"
+                        alt="Movie 1"></a>
+                <p style="font-size: 20px;"><strong>lesdeuxtours-2002-aventure</strong></p>
+                <img src="seven-1995-thriller.jpg" alt="Movie 1">
+                <p style="font-size: 20px;"><strong>seven-1995-thriller</strong></p>
+            </div>
+            <div style="margin: 06rem;">
+                <img src="shutterisland-2010-thriller.jpg" alt="Movie 1">
+                <p style="font-size: 20px;"><strong>shutterisland-2010-thriller</strong></p>
+                <img src="starwarsempire-1980-scifi.jpg" alt="Movie 1">
+                <p style="font-size: 20px;"><strong>starwarsempire-1980-scifi</strong></p>
+            </div>
+            <div style="margin: 06rem;">
+                <img src="Survivestyle5-2004-comedie.jpg" alt="Movie 1">
+                <p style="font-size: 20px;"><strong>Survivestyle5-2004-comedie</strong></p>
+                <img src="swissarmyman-2016-comedie.jpg" alt="Movie 1">
+                <p style="font-size: 20px;"><strong>swissarmyman-2016-comedie</strong></p>
+            </div>
+            <!-- Ajouter plus de séries ici -->
+        </div>
+    </section>
+
+    <section id="shop-movies">
+        <h2>Shop Movies</h2>
+        <div id="carouselShopMovies" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div style="display: flex;justify-content: center;">
+                        <div style="margin: 06rem;">
+                            <img src="starwarsempire-1980-scifi (1).jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>starwarsempire-1980</strong></p>
+                            <img src="zoolander-2001-comedie.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>zoolander-2001-comedie</strong></p>
+                        </div>
+                        <div style="margin: 06rem;">
+                            <img src="hostel-2005-thriller.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>hostel-2005-thriller</strong></p>
+                            <img src="thefall-2006-dramatique.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>thefall-2006-dramatique</strong></p>
+                        </div>
+                        <div style="margin: 06rem;">
+                            <img src="WhatWeDoInTheShadows-2014-comedie.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>WhatWeDoInTheShadows-2014-comedie</strong></p>
+                            <img src="lepatientanglais-1996-dramatique.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>lepatientanglais-1996-dramatique</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div style="display: flex; justify-content: center;">
+                        <div style="margin: 06rem;">
+                            <img src="lesdeuxtours-2002-aventure.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>lesdeuxtours-2002-aventure</strong></p>
+                            <img src="seven-1995-thriller.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>seven-1995-thriller</strong></p>
+                        </div>
+                        <div style="margin: 06rem;">
+                            <img src="shutterisland-2010-thriller.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>shutterisland-2010-thriller</strong></p>
+                            <img src="starwarsempire-1980-scifi.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>starwarsempire-1980-scifi</strong></p>
+                        </div>
+                        <div style="margin: 06rem;">
+                            <img src="Survivestyle5-2004-comedie.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>Survivestyle5-2004-comedie</strong></p>
+                            <img src="swissarmyman-2016-comedie.jpg" alt="Movie 1">
+                            <p style="font-size: 20px;"><strong>swissarmyman-2016-comedie</strong></p>
+                        </div>
+                    </div> >
+                </div>
+                <div class="carousel-item">
+                    <img src="inception-2010-scifi.jpg" alt="Movie 2">
+                    <p style="font-size: 20px;"><strong>inception-2010-scifi</strong></p>
+                </div>
+
+                <!-- Ajouter plus de films ici -->
+            </div>
+            <a class="carousel-control-prev" href="#carouselShopMovies" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselShopMovies" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <!-- contact -->
+
+        <section id="contact" class="container">
+            <form id="contactForm">
+                <div class="row">
+                    <div class="col-4">
+                        <h2>Contactez-Nous</h2>
+                    </div>
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col">
+                                <label for="firstName">firstName</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                    placeholder="First name" required>
+                            </div>
+                            <div class="col">
+                                <label for="lastName">lastName</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                    placeholder="Last name" required>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email_contact" name="email"
+                                    placeholder="Email" required>
+                            </div>
+                            <div class="col">
+                                <label for="subject">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject"
+                                    placeholder="Subject" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="3"
+                                placeholder="Votre message" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger" style="margin: 0% 35%;">Envoyer le message</button>
+            </form>
+            <p style="display: flex;justify-content: flex-end;margin: 3rex;">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d40314.46750790546!2d4.3499267!3d50.83756845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sbe!4v1740750511403!5m2!1sfr!2sbe"
+                    width="840" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </p>
+
+        </section>
+
+        <!-- Modal Structure -->
+        <div class="modal fade" id="popupModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Form Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="formData"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
+        <footer class="text-center">
+            <p>&copy; 2025 Cinema</p>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Afficher le pop-up d'âge
+                $('#agePopup').modal('show');
+
+                // Vérification de l'âge
+                document.getElementById('confirmAge').addEventListener('click', function () {
+                    var birthdate = new Date(document.getElementById('birthdate').value);
+                    if (!birthdate) {
+                        alert('Veuillez entrer une date de naissance valide.');
+                        return;
+                    }
+                    var today = new Date();
+                    var age = today.getFullYear() - birthdate.getFullYear();
+                    var month = today.getMonth() - birthdate.getMonth();
+                    if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
+                        age--;
+                    }
+
+                    if (age >= 18) {
+                        $('#agePopup').modal('hide');
+                    } else {
+                        alert('Vous devez avoir au moins 18 ans pour accéder à ce site.');
+                        window.location.href = 'https://www.google.com';
+                    }
+                });
+
+                // pour les featured films
+                function filterMovies(genre) {
+                    const films = document.querySelectorAll('.film');
+                    films.forEach(film => {
+                        if (film.getAttribute('data-genre') === genre) {
+                            film.style.display = 'block';
+                        } else {
+                            film.style.display = 'none';
+                        }
+                    });
+                }
+
+                function toggleMoreMovies() {
+                    const button = document.querySelector('#featured-movies .buttons button:last-child');
+                    const moreMovies = document.querySelectorAll('.film[data-extra="true"]');
+                    moreMovies.forEach(film => {
+                        if (film.style.display === 'none' || film.style.display === '') {
+                            film.style.display = 'block';
+                            button.textContent = 'Moins des films';
+                        } else {
+                            film.style.display = 'none';
+                            button.textContent = 'Plus des films';
+                        }
+                    });
+                }
+                // send message 
+                document.getElementById("contactForm").addEventListener("submit", function (event) {
+                    event.preventDefault(); // Empêche le rechargement de la page
+
+                    // Récupère les données du formulaire
+                    const firstName = document.getElementById("firstName").value;
+                    const lastName = document.getElementById("lastName").value;
+                    const email = document.getElementById("email_contact").value;
+                    const subject = document.getElementById("subject").value;
+                    const message = document.getElementById("message").value;
+
+                    // Affiche les données dans le pop-up
+                    document.getElementById("formData").innerText = `firstName: ${firstName}\nlastName: ${lastName}\nEmail: ${email}\nSubjet: ${subject}\nMessage: ${message}`;
+
+                    // Ouvre le pop-up
+                    $('#popupModal').modal('show');
+                });
+
+
+                // Crée le bouton
+                const button = document.createElement('button');
+                button.id = 'backToTop';
+                button.appendChild(document.createTextNode('↑'));
+                document.body.appendChild(button);
+
+                // Ajoute l'écouteur d'événement pour le clic sur le bouton
+                button.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Affiche ou masque le bouton selon la position de défilement
+                window.addEventListener('scroll', () => {
+                    const header = document.querySelector('header');
+                    const headerHeight = header.offsetHeight;
+                    if (window.scrollY > headerHeight) {
+                        button.style.display = 'block';
+                    } else {
+                        button.style.display = 'none';
+                    }
+                });
+                // pour les futured series movies
+
+
+                // Afficher l'avertissement de cookies
+                setTimeout(function () {
+                    document.getElementById('cookieWarning').style.display = 'block';
+                }, 3000);
+            });
+        </script>
 </body>
 
 </html>
