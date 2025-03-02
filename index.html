@@ -19,7 +19,7 @@
             padding: 10px;
             border-radius: 2%;
             cursor: pointer;
-            z-index: 1000;
+            z-index: 10;
         }
 
         /* pour le header  */
@@ -64,8 +64,7 @@
             margin: 0 10px;
         }
 
-        /*  */
-/* pour les reseaux sociaux */
+        /* pour les reseaux sociaux */
         .fixed-social {
             position: fixed;
             bottom: 10px;
@@ -73,36 +72,32 @@
             /* Changer de right à left pour positionner à gauche */
             display: flex;
             flex-direction: column;
+            z-index: 100
         }
 
         .btn {
-            width: 150px; /* Largeur initiale des boutons */
+            width: 150px;
+            /* Largeur initiale des boutons */
             transition: width 0.3s;
         }
 
         .btn:hover {
-            width: 200px; /* Largeur du bouton lorsqu'il est survolé */
+            width: 200px;
+            /* Largeur du bouton lorsqu'il est survolé */
         }
 
-        /* pour les featured Movies */
-        #featured-movies {
-            margin: 2em 0;
+        /* pour la section films */
+        #films {
+            background-color: #f9f9f9;
+            padding: 50px 0;
         }
 
-        #featured-movies .buttons {
-            text-align: center;
-            margin-bottom: 1em;
+        .film-card {
+            margin-bottom: 20px;
         }
 
-        #featured-movies .buttons button {
-            margin: 0 10px;
-            padding: 0.5em 1em;
-            cursor: pointer;
-        }
-
-        .film {
-            display: none;
-            /* Masquer les films supplémentaires par défaut */
+        .modal-body p {
+            margin: 10px 0;
         }
 
         /* pour les featured series tv */
@@ -307,26 +302,71 @@
 
     <!-- Contenu des sections (Featured Movies,Featured series TV, Shop Movies, Contact) -->
 
-    <section id="featured-movies">
-        <h2>Featured Movies</h2>
-        <div class="buttons">
-            <button onclick="filterMovies('action')">Action</button>
-            <button onclick="filterMovies('comedy')">Comedy</button>
-            <button onclick="filterMovies('drama')">Drama</button>
-            <button onclick="toggleMoreMovies()">Plus des films</button>
-        </div>
-        <div class="films">
-            <div class="film" data-genre="action">
-                <img src="intouchables-2011-comedie.jpg" alt="Action Movie">
-                <p>description</p>
+    <section id="films" class="my-5">
+        <div class="container">
+            <h2 class="text-center">Films</h2>
+            <div class="buttons text-center">
+                <button class="btn btn-primary filter-btn" data-genre="all">All</button>
+                <button class="btn btn-primary filter-btn" data-genre="action">Action</button>
+                <button class="btn btn-primary filter-btn" data-genre="drama">Drama</button>
             </div>
-            <div class="film" data-genre="action">
-                <img src="Survivestyle5-2004-comedie.jpg" alt="Action Movie">
-                <p>description</p>
+            <div class="row films mt-4">
+                <!-- Exemple de film -->
+                <div class="col-md-4 film-card" data-genre="action">
+                    <div class="card" style="cursor: pointer;">
+                        <img src="intouchables-2011-comedie.jpg" class="card-img-top" alt="Intouchables">
+                        <div class="card-body">
+                            <h5 class="card-title">Intouchables</h5>
+                            <p class="card-text">Année de sortie: 2011</p>
+                            <p class="card-text">Genre: Action</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 film-card" data-genre="comedy">
+                    <div class="card" style="cursor: pointer;">
+                        <img src="Survivestyle5-2004-comedie.jpg" class="card-img-top" alt="Survivestyle5">
+                        <div class="card-body">
+                            <h5 class="card-title">Survivestyle5</h5>
+                            <p class="card-text">Année de sortie: 2004</p>
+                            <p class="card-text">Genre: Comédie</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 film-card" data-genre="drama">
+                    <div class="card" style="cursor: pointer;">
+                        <img src="lepatientanglais-1996-dramatique.jpg" class="card-img-top" alt="Le Patient Anglais">
+                        <div class="card-body">
+                            <h5 class="card-title">Le Patient Anglais</h5>
+                            <p class="card-text">Année de sortie: 1996</p>
+                            <p class="card-text">Genre: Dramatique</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ajouter plus de films ici -->
             </div>
-            <!-- Ajouter plus de films ici -->
         </div>
     </section>
+
+    <!-- Modal Structure -->
+    <div class="modal fade" id="filmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filmModalLabel">Détails du Film</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Trailer YouTube et Détails du Film -->
+                    <div id="filmTrailer" class="mb-3"></div>
+                    <p id="filmDescription"></p>
+                    <p><strong>Réalisateur:</strong> <span id="filmDirector"></span></p>
+                    <p><strong>Année de sortie:</strong> <span id="filmYear"></span></p>
+                    <p><strong>Genre:</strong> <span id="filmGenre"></span></p>
+                    <p><strong>Acteurs:</strong> <span id="filmActors"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section id="featured-series-tv">
         <h2>Featured Series TV</h2>
@@ -522,31 +562,56 @@
                     }
                 });
 
-                // pour les featured films
-                function filterMovies(genre) {
-                    const films = document.querySelectorAll('.film');
-                    films.forEach(film => {
-                        if (film.getAttribute('data-genre') === genre) {
-                            film.style.display = 'block';
-                        } else {
-                            film.style.display = 'none';
-                        }
-                    });
-                }
+                // pour les films
+                document.addEventListener('DOMContentLoaded', function () {
+                    const filmCards = document.querySelectorAll('.film-card');
+                    const filmModal = new bootstrap.Modal(document.getElementById('filmModal'));
+                    const modalTitle = document.getElementById('filmModalLabel');
+                    const modalTrailer = document.getElementById('filmTrailer');
+                    const modalDescription = document.getElementById('filmDescription');
+                    const modalDirector = document.getElementById('filmDirector');
+                    const modalYear = document.getElementById('filmYear');
+                    const modalGenre = document.getElementById('filmGenre');
+                    const modalActors = document.getElementById('filmActors');
 
-                function toggleMoreMovies() {
-                    const button = document.querySelector('#featured-movies .buttons button:last-child');
-                    const moreMovies = document.querySelectorAll('.film[data-extra="true"]');
-                    moreMovies.forEach(film => {
-                        if (film.style.display === 'none' || film.style.display === '') {
-                            film.style.display = 'block';
-                            button.textContent = 'Moins des films';
-                        } else {
-                            film.style.display = 'none';
-                            button.textContent = 'Plus des films';
+                    const filmDetails = {
+                        'Intouchables': {
+                            trailerId: 'ekzHIouo8Q4', // Remplace par l'ID de la bande-annonce YouTube
+                            description: 'Un aristocrate, devenu paraplégique à la suite d’un accident de parapente, engage comme aide à domicile un jeune de banlieue tout juste sorti de prison.',
+                            director: 'Olivier Nakache, Éric Toledano',
+                            actors: 'François Cluzet, Omar Sy, Anne Le Ny'
+                        },
+                        'Survivestyle5': {
+                            trailerId: 'YZJS3BQufTQ', // Remplace par l'ID de la bande-annonce YouTube
+                            description: 'Une comédie japonaise absurde et colorée avec plusieurs histoires entrecroisées.',
+                            director: 'Gen Sekiguchi',
+                            actors: 'Tadanobu Asano, Vinnie Jones, Reika Hashimoto'
+                        },
+                        'Le Patient Anglais': {
+                            trailerId: 'dzMl7SrgHzM', // Remplace par l'ID de la bande-annonce YouTube
+                            description: 'Un patient gravement brûlé se remémore sa vie tumultueuse pendant la Seconde Guerre mondiale.',
+                            director: 'Anthony Minghella',
+                            actors: 'Ralph Fiennes, Juliette Binoche, Willem Dafoe'
                         }
+                    };
+
+                    filmCards.forEach(card => {
+                        card.addEventListener('click', () => {
+                            const title = card.querySelector('.card-title').textContent;
+                            const details = filmDetails[title];
+
+                            modalTitle.textContent = title;
+                            modalTrailer.innerHTML = `<iframe width="100%" height="400px" src="https://www.youtube.com/embed/${details.trailerId}" frameborder="0" allowfullscreen></iframe>`;
+                            modalDescription.textContent = details.description;
+                            modalDirector.textContent = details.director;
+                            modalYear.textContent = card.querySelector('.card-text').textContent.split(':')[1].trim();
+                            modalGenre.textContent = card.getAttribute('data-genre');
+                            modalActors.textContent = details.actors;
+
+                            filmModal.show();
+                        });
                     });
-                }
+                });
                 // send message 
                 document.getElementById("contactForm").addEventListener("submit", function (event) {
                     event.preventDefault(); // Empêche le rechargement de la page
