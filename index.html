@@ -17,7 +17,7 @@
             color: white;
             border: none;
             padding: 10px;
-            border-radius: 2%;
+            border-radius: 20%;
             cursor: pointer;
             z-index: 10;
         }
@@ -100,6 +100,17 @@
             margin: 10px 0;
         }
 
+        /* por la section featured-movies */
+        .movie {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        .more {
+            display: none;
+            /* Cacher les films supplémentaires par défaut */
+        }
+
         /* pour les featured series tv */
         #featured-series-tv {
             margin: 2em 0;
@@ -158,6 +169,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#films">Films</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#featured-movies">Featured Movies</a>
                 </li>
@@ -305,14 +319,11 @@
     <section id="films" class="my-5">
         <div class="container">
             <h2 class="text-center">Films</h2>
-            <div class="buttons text-center">
-                <button class="btn btn-primary filter-btn" data-genre="all">All</button>
-                <button class="btn btn-primary filter-btn" data-genre="action">Action</button>
-                <button class="btn btn-primary filter-btn" data-genre="drama">Drama</button>
-            </div>
             <div class="row films mt-4">
-                <!-- Exemple de film -->
-                <div class="col-md-4 film-card" data-genre="action">
+                <div class="col-md-4 film-card" data-genre="action" data-title="Intouchables" data-year="2011"
+                    data-genre="Action" data-director="Réalisateur 1"
+                    data-description="Description du film Intouchables" data-actors="Acteur 1, Acteur 2"
+                    data-trailer="https://www.youtube.com/watch?v=EuNz9sYFz9k" onclick="openModal(this)">
                     <div class="card" style="cursor: pointer;">
                         <img src="intouchables-2011-comedie.jpg" class="card-img-top" alt="Intouchables">
                         <div class="card-body">
@@ -322,7 +333,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 film-card" data-genre="comedy">
+                <div class="col-md-4 film-card" data-genre="comedy" data-title="Survivestyle5" data-year="2004"
+                    data-genre="Comédie" data-director="Réalisateur 2"
+                    data-description="Description du film Survivestyle5" data-actors="Acteur 3, Acteur 4"
+                    data-trailer="https://www.youtube.com/watch?v=EuNz9sYFz9k" onclick="openModal(this)">
                     <div class="card" style="cursor: pointer;">
                         <img src="Survivestyle5-2004-comedie.jpg" class="card-img-top" alt="Survivestyle5">
                         <div class="card-body">
@@ -332,7 +346,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 film-card" data-genre="drama">
+                <div class="col-md-4 film-card" data-genre="drama" data-title="Le Patient Anglais" data-year="1996"
+                    data-genre="Dramatique" data-director="Réalisateur 3"
+                    data-description="Description du film Le Patient Anglais" data-actors="Acteur 5, Acteur 6"
+                    data-trailer="https://www.youtube.com/watch?v=EuNz9sYFz9k" onclick="openModal(this)">
                     <div class="card" style="cursor: pointer;">
                         <img src="lepatientanglais-1996-dramatique.jpg" class="card-img-top" alt="Le Patient Anglais">
                         <div class="card-body">
@@ -342,7 +359,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Ajouter plus de films ici -->
             </div>
         </div>
     </section>
@@ -356,8 +372,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Trailer YouTube et Détails du Film -->
-                    <div id="filmTrailer" class="mb-3"></div>
+                    <div id="filmTrailer" class="mb-3">
+                        <iframe id="filmTrailerVideo" width="100%" height="400" frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
                     <p id="filmDescription"></p>
                     <p><strong>Réalisateur:</strong> <span id="filmDirector"></span></p>
                     <p><strong>Année de sortie:</strong> <span id="filmYear"></span></p>
@@ -368,11 +386,58 @@
         </div>
     </div>
 
+    <section id="featured-movies">
+        <h2 class="text-center">Featured Movies</h2>
+        <div class="buttons text-center mb-3">
+            <button class="btn btn-primary filter-btn" data-genre="all">All</button>
+            <button class="btn btn-primary filter-btn" data-genre="action">Action</button>
+            <button class="btn btn-primary filter-btn" data-genre="drama">Drama</button>
+        </div>
+        <div class="movies d-flex justify-content-center flex-wrap">
+            <div class="movie" data-genre="action">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="WhatWeDoInTheShadows-2014-comedie.jpg"
+                        alt="Fast and Furious"></a>
+                <p><strong>WhatWeDoInTheShadows-2014-action_comedie</strong></p>
+            </div>
+            <div class="movie" data-genre="drama">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="thefall-2006-dramatique.jpg"
+                        alt="Mad Max: Fury Road"></a>
+                <p><strong>thefall-2006-dramatique</strong></p>
+            </div>
+            <div class="movie" data-genre="action">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="batmanmovie-2017-comedie.jpg"
+                        alt="Schindler's List"></a>
+                <p><strong>inception-2010-scifi</strong></p>
+            </div>
+            <div class="movie" data-genre="drama">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="lepatientanglais-1996-dramatique.jpg"
+                        alt="The Godfather"></a>
+                <p><strong>lepatientanglais-1996-dramatique</strong></p>
+            </div>
+            <div class="movie more" data-genre="action">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="seven-1995-thriller.jpg" alt="Die Hard"></a>
+                <p><strong>seven-1995-thriller</strong></p>
+            </div>
+            <div class="movie more" data-genre="drama">
+                <a href="https://www.youtube.com/watch?v=7f9Gmd-Oe6E"><img src="shutterisland-2010-thriller.jpg" alt="Forrest Gump"></a>
+                <p><strong>shutterisland-2010-thriller</strong></p>
+            </div>
+        </div>
+        <div class="text-center mt-3 d-flex justify-content-center">
+            <button class="btn btn-secondary" id="show-more-btn">Plus des films</button>
+            <button class="btn btn-secondary" id="show-less-btn" style="display: none;">Moins des films</button>
+        </div>
+    </section>
     <section id="featured-series-tv">
         <h2>Featured Series TV</h2>
+        <div class="buttons text-center">
+            <button class="btn btn-primary filter-btn" data-genre="all">All</button>
+            <button class="btn btn-primary filter-btn" data-genre="action">Action</button>
+            <button class="btn btn-primary filter-btn" data-genre="drama">Drama</button>
+        </div>
         <div style="display: flex; justify-content: center;">
             <div style="margin: 06rem;">
-                <a href="https://www.youtube.com/watch?v=-hzFTJDJGkQ"><img src="lesdeuxtours-2002-aventure.jpg"
+                <a href="https://www.youtube.com/watch?v=EuNz9sYFz9k"><img src="lesdeuxtours-2002-aventure.jpg"
                         alt="Movie 1"></a>
                 <p style="font-size: 20px;"><strong>lesdeuxtours-2002-aventure</strong></p>
                 <img src="seven-1995-thriller.jpg" alt="Movie 1">
@@ -391,6 +456,10 @@
                 <p style="font-size: 20px;"><strong>swissarmyman-2016-comedie</strong></p>
             </div>
             <!-- Ajouter plus de séries ici -->
+        </div>
+        <div class="text-center mt-3">
+            <button class="btn btn-secondary" id="show-more-btn">Plus des films</button>
+            <button class="btn btn-secondary" id="show-less-btn" style="display: none;">Moins des films</button>
         </div>
     </section>
 
@@ -563,55 +632,27 @@
                 });
 
                 // pour les films
-                document.addEventListener('DOMContentLoaded', function () {
-                    const filmCards = document.querySelectorAll('.film-card');
+                function openModal(filmElement) {
+                    const title = filmElement.getAttribute('data-title');
+                    const year = filmElement.getAttribute('data-year');
+                    const genre = filmElement.getAttribute('data-genre');
+                    const director = filmElement.getAttribute('data-director');
+                    const description = filmElement.getAttribute('data-description');
+                    const actors = filmElement.getAttribute('data-actors');
+                    const trailer = filmElement.getAttribute('data-trailer');
+
+                    document.getElementById('filmModalLabel').textContent = title;
+                    document.getElementById('filmYear').textContent = year;
+                    document.getElementById('filmGenre').textContent = genre;
+                    document.getElementById('filmDirector').textContent = director;
+                    document.getElementById('filmDescription').textContent = description;
+                    document.getElementById('filmActors').textContent = actors;
+                    document.getElementById('filmTrailerVideo').src = trailer;
+
                     const filmModal = new bootstrap.Modal(document.getElementById('filmModal'));
-                    const modalTitle = document.getElementById('filmModalLabel');
-                    const modalTrailer = document.getElementById('filmTrailer');
-                    const modalDescription = document.getElementById('filmDescription');
-                    const modalDirector = document.getElementById('filmDirector');
-                    const modalYear = document.getElementById('filmYear');
-                    const modalGenre = document.getElementById('filmGenre');
-                    const modalActors = document.getElementById('filmActors');
+                    filmModal.show();
+                }
 
-                    const filmDetails = {
-                        'Intouchables': {
-                            trailerId: 'ekzHIouo8Q4', // Remplace par l'ID de la bande-annonce YouTube
-                            description: 'Un aristocrate, devenu paraplégique à la suite d’un accident de parapente, engage comme aide à domicile un jeune de banlieue tout juste sorti de prison.',
-                            director: 'Olivier Nakache, Éric Toledano',
-                            actors: 'François Cluzet, Omar Sy, Anne Le Ny'
-                        },
-                        'Survivestyle5': {
-                            trailerId: 'YZJS3BQufTQ', // Remplace par l'ID de la bande-annonce YouTube
-                            description: 'Une comédie japonaise absurde et colorée avec plusieurs histoires entrecroisées.',
-                            director: 'Gen Sekiguchi',
-                            actors: 'Tadanobu Asano, Vinnie Jones, Reika Hashimoto'
-                        },
-                        'Le Patient Anglais': {
-                            trailerId: 'dzMl7SrgHzM', // Remplace par l'ID de la bande-annonce YouTube
-                            description: 'Un patient gravement brûlé se remémore sa vie tumultueuse pendant la Seconde Guerre mondiale.',
-                            director: 'Anthony Minghella',
-                            actors: 'Ralph Fiennes, Juliette Binoche, Willem Dafoe'
-                        }
-                    };
-
-                    filmCards.forEach(card => {
-                        card.addEventListener('click', () => {
-                            const title = card.querySelector('.card-title').textContent;
-                            const details = filmDetails[title];
-
-                            modalTitle.textContent = title;
-                            modalTrailer.innerHTML = `<iframe width="100%" height="400px" src="https://www.youtube.com/embed/${details.trailerId}" frameborder="0" allowfullscreen></iframe>`;
-                            modalDescription.textContent = details.description;
-                            modalDirector.textContent = details.director;
-                            modalYear.textContent = card.querySelector('.card-text').textContent.split(':')[1].trim();
-                            modalGenre.textContent = card.getAttribute('data-genre');
-                            modalActors.textContent = details.actors;
-
-                            filmModal.show();
-                        });
-                    });
-                });
                 // send message 
                 document.getElementById("contactForm").addEventListener("submit", function (event) {
                     event.preventDefault(); // Empêche le rechargement de la page
@@ -629,7 +670,6 @@
                     // Ouvre le pop-up
                     $('#popupModal').modal('show');
                 });
-
 
                 // Crée le bouton
                 const button = document.createElement('button');
@@ -655,8 +695,38 @@
                         button.style.display = 'none';
                     }
                 });
-                // pour les futured series movies
 
+                // JavaScript pour gérer le filtrage et les boutons afficher/masquer
+                const filterBtns = document.querySelectorAll('.filter-btn');
+                const movies = document.querySelectorAll('.movie');
+                const showMoreBtn = document.getElementById('show-more-btn');
+                const showLessBtn = document.getElementById('show-less-btn');
+                const moreMovies = document.querySelectorAll('.more');
+
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const genre = btn.getAttribute('data-genre');
+                        movies.forEach(movie => {
+                            movie.style.display = genre === 'all' || movie.getAttribute('data-genre') === genre ? 'block' : 'none';
+                        });
+                    });
+                });
+
+                showMoreBtn.addEventListener('click', () => {
+                    moreMovies.forEach(movie => {
+                        movie.style.display = 'block';
+                    });
+                    showMoreBtn.style.display = 'none';
+                    showLessBtn.style.display = 'block';
+                });
+
+                showLessBtn.addEventListener('click', () => {
+                    moreMovies.forEach(movie => {
+                        movie.style.display = 'none';
+                    });
+                    showLessBtn.style.display = 'none';
+                    showMoreBtn.style.display = 'block';
+                });
 
                 // Afficher l'avertissement de cookies
                 setTimeout(function () {
