@@ -6,8 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RedLine - Films</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>       
+        /* Votre code CSS */
+   
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 0 10px;
+        }
+        .social-icon i {
+            flex-shrink: 0;
+            transition: margin-right 0.3s ease;
+        }
+        .social-icon span {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-left: 10px;
+        }
+        .social-icon:hover {
+            width: 200px; /* Allonge la div sur le survol */
+            justify-content: flex-start;
+        }
+        .social-icon:hover i {
+            margin-right: 10px; /* Ajoute l'espace entre l'icône et le texte sur le survol */
+        }
+        .social-icon:hover span {
+            opacity: 1; /* Affiche le texte sur le survol */
+        }
+        .facebook { background-color: #3b5998; }
+        .twitter { background-color: #00acee; }
+        .instagram { background-color: #e1306c; }
+        .gmail { background-color: #db4437; }
+
+        .social-icons {
+            position: fixed;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            z-index: 9999; /* Donner la priorité aux icônes */
+        }
         #backToTop {
             position: fixed;
             bottom: 20px;
@@ -194,7 +241,7 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="batmanmovie-2017-comedie.jpg" class="d-block w-100" alt="First slide">
+                    <img src="batmanmovie-2017-comedie.jpg" class="d-block w-100" alt="First slide" style="background-position: center;background-size: cover;">
                     <div class="carousel-caption">
                         <h1 class="display-4">Bienvenue sur Allezcine!</h1>
                         <p class="lead">Découvrez et regardez des films incroyables.</p>
@@ -303,13 +350,25 @@
         </div>
     </div>
 
-    <div class="fixed-social">
-        <a href="#" class="btn btn-primary">Facebook</a>
-        <a href="#" class="btn btn-info">Twitter</a>
-        <a href="#" class="btn btn-secondary">Instagram</a>
-        <a href="#" class="btn btn-danger">Gmail</a>
+   
+    <div class="social-icons">
+        <div class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+        </div>
+        <div class="social-icon twitter">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+        </div>
+        <div class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </div>
+        <div class="social-icon gmail">
+            <i class="far fa-envelope"></i>
+            <span>Gmail</span>
+        </div>
     </div>
-
     <!-- Contenu des sections (Featured Movies,Featured series TV, Shop Movies, Contact) -->
 
     <section id="films" class="my-5">
@@ -786,6 +845,7 @@
                 }, 3000);
             });
         </script>
+    </section>
 </body>
 
 </html>
